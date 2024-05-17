@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Articles{% endblock %}
+
+{% block content %}
+<h1 class='text-center mb-3'>Все пользователи (Админка)</h1>
+<div class="container text-center">
+{% for user_cur in object_list %}
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                 {% if user_cur.is_active %}
+                <div class>
+                    <span class="font-weight-bold">{{ user_cur.username }}</span>
+                    <span class="text-primary"> {{ user_cur.email }} </span>
+                    {% if user_cur.is_superuser %}
+                    <span class="text-danger"> Админ </span>
+                    {% endif %}
+                </div>
+                {% else %}
+                <div class="text-muted">
+                    <span class="font-weight-bold">{{ user_cur.username }}</span>
+                    <span class=""> {{ user_cur.email }} </span>
+                    {% if user_cur.is_superuser %}
+                    <span class="text-danger"> Админ </span>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <div class>
+                     <a type="button" class="float-right btn btn-primary" href="{% url 'adminUsersDelete' user_cur.id %}">Удалить</a>
+                     <a type="button" class="float-right btn btn-primary" href="{% url 'adminUsersUpdate' user_cur.id %}">Редактировать</a>
+                </div>
+            </div>
+        </div>
+    <br />
+{% endfor %}
+    <div class="d-grid gap-2">
+      <a class="btn btn-success" type="button" href="{% url 'adminUsersCreate' %}">Добавить пользователя</a>
+    </div>
+</div>
+<p></p>
+{% endblock %}

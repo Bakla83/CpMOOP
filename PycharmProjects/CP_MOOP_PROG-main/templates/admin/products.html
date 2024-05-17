@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Продукты{% endblock %}
+
+{% block content %}
+<div class="section-top">
+    </div>
+    <div class="section section1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Продукты (Админ)
+                    </h1>
+                </div>
+                {% for product_image in object_list %}
+                    {% include 'landing/product_item_admin.html' %}
+                {% endfor %}
+            </div>
+            <h1 class="text-center">
+                <a href="{% url 'adminArticlesCreate' %}"type="button" class="btn btn-success btn-lg">Добавить новый товар</a>
+            </h1>
+        </div>
+    </div>
+{% endblock %}

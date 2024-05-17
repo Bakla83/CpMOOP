@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+{% if user.is_superuser%}
+<div class = 'container'>
+    <h1>Изменить</h1>
+    <form action="" method="post"> {% csrf_token %}
+        {{ form|crispy }}
+        <button class="btn btn-primary" type="submit">Обновить</button>
+        <button class = 'btn btn-primary' type='reset'>Отменить</button>
+    </form>
+   </div>
+{% else %}
+<div class = 'container'>
+    <div class = 'text-center'>
+        <h1> УПС!</h1>
+        <h3> У вас недостаточно прав для изменения статьи</h3>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
